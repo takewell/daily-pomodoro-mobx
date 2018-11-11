@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../logo.svg';
 import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 
@@ -16,10 +17,19 @@ export const TimerView = observer(({ timer }) => {
 function Timer({ time, isStop, calcTime, onClick }) {
   return (
     <div>
-      <h2>Pomodoro Memo</h2>
-      <p>{calcTime(time)}</p>
-      <button className="button" onClick={onClick}>
-        {isStop ? 'Play' : 'Stop'}
+      <img
+        src={logo}
+        className="App-logo"
+        alt="logo"
+        style={{
+          animation: `App-logo-spin infinite 1500s linear ${
+            isStop ? 'paused' : 'running'
+          }`
+        }}
+      />
+      <p className="App-color timer-font">{calcTime(time)}</p>
+      <button className="switch-bottom " onClick={onClick}>
+        {isStop ? 'Start' : 'Stop'}
       </button>
     </div>
   );
@@ -27,10 +37,9 @@ function Timer({ time, isStop, calcTime, onClick }) {
 
 const POMODORO_TIME = 60 * 25;
 export class TimerModel {
-  @observable
-  time = POMODORO_TIME;
-  @observable
-  isStop = true;
+  @observable time = POMODORO_TIME;
+  @observable isStop = true;
+
   constructor() {
     this.isBreak = false;
     this.pomoTime = POMODORO_TIME;

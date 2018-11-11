@@ -4,22 +4,12 @@ import { observer } from 'mobx-react';
 
 export const TodoAppView = observer(({ todo }) => {
   return (
-    <div>
-      <h1>Todos</h1>
-      <div>{todo.filter}</div>
-      <h2>Create</h2>
+    <div style={{ marginTop: '30px' }}>
       <input
-        className="create"
+        className="create-task-input"
         type="text"
+        placeholder="create task"
         onKeyPress={e => todo.createNew(e)}
-      />
-      <br />
-      <h2>Filter</h2>
-      <input
-        className="filter"
-        type="text"
-        value={todo.filter}
-        onChange={e => todo.filtering(e)}
       />
       <ul>
         {todo.filterdeTodos.map(todo => {
@@ -27,11 +17,13 @@ export const TodoAppView = observer(({ todo }) => {
             <li key={todo.id}>
               <input
                 type="checkbox"
+                className="check-input"
                 value={todo.complete}
                 onChange={todo.toggleComplete}
                 checked={todo.complete}
               />
               {todo.value}
+              <hr />
             </li>
           );
         })}
@@ -44,12 +36,9 @@ export const TodoAppView = observer(({ todo }) => {
 });
 
 class TodoItemModel {
-  @observable
-  value;
-  @observable
-  id;
-  @observable
-  complete;
+  @observable value;
+  @observable id;
+  @observable complete;
 
   constructor(value) {
     this.value = value;
