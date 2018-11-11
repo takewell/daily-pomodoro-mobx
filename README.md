@@ -1,4 +1,4 @@
-# daipy pomodoro 
+# daily pomodoro 
 
 mobx practice
 
